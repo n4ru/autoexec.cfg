@@ -4,8 +4,8 @@ A Counter-Strike 2 autoexec — *"mostly just things I think should be in the ga
 
 Quality-of-life binds plus a handful of aim/movement helpers, built entirely from in-game
 console aliases (no external software or macros). Highlights: hold-to-peek knife quickswitch,
-weapon-aware right-click, pistol rapidfire, dynamic crosshairs, a 180° bind, one-key
-buy-and-equip for utility, a reload/inspect combo, and a toggleable y-axis lock.
+weapon-aware right-click, dynamic crosshairs, a 180° bind, one-key buy-and-equip for utility,
+a reload/inspect combo, and a toggleable y-axis lock.
 
 ## Install
 
@@ -36,7 +36,7 @@ Suggested gap per resolution:
 | Input               | Action                                                                                   |
 | ------------------- | ---------------------------------------------------------------------------------------- |
 | **Left click**      | Fire. Cycles spectator target when dead.                                                 |
-| **Right click**     | Weapon-aware: rifle = scope/silencer, pistol = rapidfire, knife = heavy stab. Cycles spectator target when dead. |
+| **Right click**     | Weapon-aware: rifle = scope/silencer, knife = heavy stab. Cycles spectator target when dead. |
 | **Mouse 5** (hold)  | Quick-peek **knife**; snaps back to your **primary** on release.                          |
 | **Mouse 4** (hold)  | Quick-peek **knife**; snaps back to your **pistol** on release.                           |
 | **Wheel up**        | Grenade slot.                                                                             |
@@ -71,19 +71,11 @@ returns to your **primary**, **Mouse 4** to your **pistol**. (Pressing **3** als
 knife and buys a defuser, but stays on the knife.)
 
 ### Weapon-aware right-click
-Right-click does the sensible thing for whatever you're holding:
+Right-click maps to your weapon's secondary (`+attack2`), so it does the sensible thing for
+whatever you're holding:
 
-- **Rifle** → scope / silencer toggle (`+attack2`)
-- **Pistol** → rapidfire (see below)
+- **Rifle** → scope / silencer toggle
 - **Knife** → heavy stab
-
-It's a single stable bind with a one-shot press latch, so swapping weapons — including knife
-peeks — while holding right-click never leaves an input stuck on.
-
-### Pistol rapidfire
-With a pistol out, **hold right-click and move the mouse** — each bit of mouse motion fires a
-shot, letting you beat the click-speed cap (Glock, USP, Deagle, etc.). Stop moving or release
-to stop. Because it's motion-driven, it doubles as a flick-fire.
 
 ### Rifle "super follow recoil" crosshair
 While spraying a rifle, the crosshair follows the recoil (`cl_crosshair_recoil`) and rapidly
@@ -133,8 +125,8 @@ While dead, **both left- and right-click cycle** to the next player you're spect
   actual gun. Most players hit a buy/select key in freeze time anyway.
 - **This config sets your sensitivity** (`sensitivity 1.3`, `m_yaw 0.022`). The y-lock and
   180 bind assume those values.
-- **Rapidfire and follow-recoil are motion-driven** via `bind mouse_x / mouse_y` — moving the
-  mouse is what drives them. That's intended, not a bug.
+- **Follow-recoil is motion-driven** via `bind mouse_x / mouse_y` — moving the mouse is what
+  drives it. That's intended, not a bug.
 - Pure vanilla console scripting — **no external macros or third-party software.**
 
 ## Credits
