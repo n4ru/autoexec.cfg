@@ -87,7 +87,8 @@ recoil reference.
 
 ### Dynamic crosshairs + color cycle
 - Separate crosshairs for **firing**, **idle**, and **y-lock** states.
-- Every time you stop firing, the crosshair **color cycles**: green → pink → cyan → yellow → …
+- The crosshair **color cycles**: green → pink → cyan → yellow → orange → … It advances every
+  time you stop firing, and again on every motion tick of the rifle follow-recoil swap.
 
 ### Y-axis lock
 Tap **Wheel down** to lock your vertical aim while keeping horizontal movement — handy for
