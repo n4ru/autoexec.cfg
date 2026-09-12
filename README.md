@@ -2,10 +2,10 @@
 
 A Counter-Strike 2 autoexec — *"mostly just things I think should be in the game anyway."*
 
-Quality-of-life binds plus a handful of aim/movement helpers, built entirely from in-game
-console aliases (no external software or macros). Highlights: hold-to-peek knife quickswitch,
-weapon-aware right-click, dynamic crosshairs, a 180° bind, one-key buy-and-equip for utility,
-a reload/inspect combo, and a toggleable y-axis lock.
+Quality-of-life binds plus a handful of aim helpers, built entirely from in-game console
+aliases (no external software or macros). Highlights: hold-to-peek knife quickswitch,
+weapon-aware right-click, dynamic crosshairs, a mouse-motion-driven smooth crosshair color
+sweep, one-key buy-and-equip for utility, and a reload/inspect combo.
 
 ## Install
 
@@ -19,15 +19,15 @@ a reload/inspect combo, and a toggleable y-axis lock.
 
 ## Crosshair
 
-Share code: `CSGO-yPDfP-3OLR8-EKz4O-ON2mJ-D3qRP`
+Share code: `CSGO-W8rpQ-SA3BC-9SpCA-HizOk-DeCcO`
 
-The crosshair changes dynamically between firing / idle / y-lock states (see below).
-Suggested gap per resolution:
+The crosshair changes dynamically between firing and idle states (see below). The config
+sets a negative gap for an 8K ultrawide; drop it to `-1.5` at 1080p:
 
 | Resolution        | Setting                  |
 | ----------------- | ------------------------ |
 | 1080p             | `cl_crosshairgap -1.5`   |
-| 8K / 2K ultrawide | `cl_crosshairgap -3.5`   |
+| 8K / 2K ultrawide | `cl_crosshairgap -4.0`   |
 
 ## Binds at a glance
 
@@ -36,11 +36,10 @@ Suggested gap per resolution:
 | Input               | Action                                                                                   |
 | ------------------- | ---------------------------------------------------------------------------------------- |
 | **Left click**      | Fire. Cycles spectator target when dead.                                                 |
-| **Right click**     | Weapon-aware: rifle = scope/silencer, knife = heavy stab. Cycles spectator target when dead. |
+| **Right click**     | Weapon-aware: rifle = scope/silencer, knife = heavy stab.                                |
 | **Mouse 5** (hold)  | Quick-peek **knife**; snaps back to your **primary** on release.                          |
 | **Mouse 4** (hold)  | Quick-peek **knife**; snaps back to your **pistol** on release.                           |
 | **Wheel up**        | Grenade slot.                                                                             |
-| **Wheel down**      | Toggle **y-axis lock**.                                                                   |
 
 ### Keyboard
 
@@ -50,7 +49,7 @@ Suggested gap per resolution:
 | **2**           | Buy armor + helmet and equip pistol.                        |
 | **3**           | Buy defuser and pull knife.                                 |
 | **4 / 5**       | Grenade slots.                                              |
-| **Q**           | Instant **180° turn**.                                      |
+| **E**           | Use.                                                        |
 | **R**           | **Reload + inspect** with a wider viewmodel FOV.            |
 | **T**           | Switch hands.                                               |
 | **B**           | Sell back everything (freeze time).                         |
@@ -59,7 +58,6 @@ Suggested gap per resolution:
 | **X**           | Buy flashbang + equip.                                      |
 | **C**           | Buy smoke + equip.                                          |
 | **V**           | Buy molotov / incendiary + equip.                           |
-| **`** (backtick)| Switch y-lock between *hold* and *release-on-fire* modes.   |
 | **Space**       | Jump.                                                       |
 
 ## Features
@@ -85,26 +83,22 @@ recoil reference.
 > The rifle behavior engages once the config knows a rifle is out (after you select it with
 > **1** or a quickswitch). See **Notes** below.
 
-### Dynamic crosshairs + color cycle
-- Separate crosshairs for **firing**, **idle**, and **y-lock** states.
-- The crosshair **color cycles**: green → pink → cyan → yellow → orange → … It advances every
-  time you stop firing, and again on every motion tick of the rifle follow-recoil swap.
+### Dynamic crosshairs
+Two crosshair states, swapped automatically:
 
-### Y-axis lock
-Tap **Wheel down** to lock your vertical aim while keeping horizontal movement — handy for
-holding a fixed crosshair height and transferring sprays along a line. The crosshair shrinks
-while locked.
+- **Firing** — no size, dot on, T-style, tight and out of the way.
+- **Idle** — small, dotless, dynamic split so you can read spread.
 
-Switch the lock's behaviour with **`** (backtick):
+### Smooth 317-step color sweep
+The crosshair colour is a continuous gradient rather than a handful of preset colours: a
+317-step loop through **green → red → yellow → magenta → cyan → violet → sky → green**,
+advanced by mouse motion (`bind mouse_x / mouse_y`), so the colour flows as you move.
 
-- **Hold mode** — the lock stays on while you shoot (crosshair turns white).
-- **Release mode** — shooting drops the lock automatically (crosshair color-cycles).
+The sweep runs at two speeds:
 
-### 180° turn
-**Q** spins you exactly 180° for instant turnarounds.
-
-> The amount is tuned to `sensitivity 1.3` + `m_yaw 0.022` (both set by this config). Change
-> your sensitivity and the 180 needs re-tuning — it's a fixed `yaw` value.
+- **Moving** — one step per motion tick, a slow drift.
+- **Firing** — five steps per tick, so holding down the trigger visibly rips through the
+  spectrum while you spray.
 
 ### Buy + equip utility (one key each)
 **Z / X / C / V** buy a grenade *and* switch to it in a single press (HE / flash / smoke /
@@ -116,7 +110,7 @@ equips the right slot.
 your gameplay FOV on release.
 
 ### Spectator cycling
-While dead, **both left- and right-click cycle** to the next player you're spectating.
+While dead, left-click cycles to the next player you're spectating.
 
 ## Notes & gotchas
 
@@ -124,10 +118,10 @@ While dead, **both left- and right-click cycle** to the next player you're spect
   weapon-select inputs you press — it can't detect what you spawn holding. Tap **1**
   (or a quickswitch) once each round so right-click and the rifle follow-recoil match your
   actual gun. Most players hit a buy/select key in freeze time anyway.
-- **This config sets your sensitivity** (`sensitivity 1.3`, `m_yaw 0.022`). The y-lock and
-  180 bind assume those values.
-- **Follow-recoil is motion-driven** via `bind mouse_x / mouse_y` — moving the mouse is what
-  drives it. That's intended, not a bug.
+- **This config sets your sensitivity** (`sensitivity 1.3`, `m_yaw 0.022`).
+- **`Q` and mouse wheel down are explicitly unbound** — they're free for you to use.
+- **The colour sweep is motion-driven** via `bind mouse_x / mouse_y` — moving the mouse is
+  what advances it (and what drives the rifle follow-recoil swap). That's intended, not a bug.
 - Pure vanilla console scripting — **no external macros or third-party software.**
 
 ## Credits
